@@ -173,10 +173,11 @@ route add -net 0.0.0.0 netmask 0.0.0.0 gw 192.168.0.5
 Memberikan ip pada subnet **SIDOARJO** dan **GRESIK** secara dinamis menggunakan bantuan DHCP SERVER (Selain subnet tersebut menggunakan ip static). Kemudian, setting DHCP RELAY pada router yang menghubungkannya.
 
 _**Penyelesaian:**_
-* MOJOKERTO : tambahkan `interfaces=”eth0”`
+**Konfigurasi DHCP Server MOJOKERTO**
 
+* tambahkan `interfaces=”eth0”` pada etc/default/isc-dhcp-server
 ![alt text](/img/d_1.jpg)
-* Tambahkan script ini di file konfigurasi dhcp MOJOKERTO
+* Buka `nano /etc/dhcp/dhcpd.conf` Lalu tambahkan script ini di file konfigurasi DHCP MOJOKERTO
 ```
 subnet 192.168.1.0 netmask 255.255.255.0 {
 	range 192.168.1.2 192.168.1.202;
@@ -203,26 +204,34 @@ subnet 10.151.73.96 netmask 255.255.255.248 {
 ```
 service isc-dhcp-server restart
 ```
-* **SIDOARJO**
-Tambah `10.151.73.98` di BATU
-
+**Konfigurasi DHCP Relay BATU**
+* atur ip address DNS pada relay server
 ![alt text](/img/d_sda_1.jpg)
-
-dhcp relay (BATU)
-
+* aktifkan baris `net.ipv4.conf.all.accept_source_rote = 0` dan ubah nilainya menjadi 1 pada `/etc/sysctl.conf`
+* periksa dengan `sysctl -p` kemudian restart server
+* install paket `isc-dhcp-relay`
+`apt-get install isc-dhcp-relay -y`
+* masukkan IP server DHCP, yaitu IP Mojokerto
+* masukkan interface yang terhubung dengan layanan DHCP
 ![alt text](/img/d_sda_2.jpg)
-* **GRESIK**
-Aktifkan baris `net.ipv4.conf.all.accept_source_rote = 0` dan ubah nilainya menjadi 1 pada `/etc/sysctl.conf`
 
+**Konfigurasi DHCP Client SIDOARJO**
+* buka `/etc/network/interfaces` dan tambahkan
+`auto eth0
+iface eth0 inet dhcp`
+* restart network
+
+**Konfigurasi DHCP Relay KEDIRI** 
+* Melakukan hal yang sama seperti konfigurasi DHCP Relay pada BATU
 ![alt text](/img/d_gsk_1.jpg)
-
-`dhcp server relay`
 
 ![alt text](/img/d_gsk_2.jpg)
 
-Pembagian ip client
+**Konfigurasi DHCP Client GRESIK**
+* Melakukan hal yang sama seperti konfigurasi DHCP Client pada SIDOARJO, sehinggga gresik mendapatkan IP sebagai berikut
 
 ![alt text](/img/d_gsk_3.jpg)
+
 #
 #### Soal 1:
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi **SURABAYA** menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE.
