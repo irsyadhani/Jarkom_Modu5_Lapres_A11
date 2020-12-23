@@ -174,6 +174,7 @@ Memberikan ip pada subnet **SIDOARJO** dan **GRESIK** secara dinamis menggunakan
 
 _**Penyelesaian:**_
 * MOJOKERTO : tambahkan `interfaces=”eth0”`
+
 ![alt text](/img/d_1.jpg)
 * Tambahkan script ini di file konfigurasi dhcp MOJOKERTO
 ```
