@@ -259,7 +259,7 @@ Membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secar
 _**Penyelesaian:**_
 * Pada UML MOJOKERTO dan MALANG memasukkan perintah sebagai berikut:
 ```
-iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 -j DROP
+iptables -A INPUT -p icmp -m connlimit --connlimit-above 3 --connlimit-mask 0 -j DROP
 ```
 ![alt text](/img/3_1.jpg)
 ![alt text](/img/3_2.jpg)
@@ -288,7 +288,7 @@ harinya.
 Selain itu paket akan di REJECT.
 
 _**Penyelesaian:**_
-* Pada UML SURABAYA memasukkan perintah sebagai berikut:
+* Pada UML MALANG memasukkan perintah sebagai berikut:
 ```
 iptables -A INPUT -s 192.168.3.0/24 -m time --timestart 07:00 --timestop 17:00 -j REJECT
 ```
