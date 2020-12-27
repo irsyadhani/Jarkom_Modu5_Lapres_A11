@@ -232,6 +232,10 @@ iface eth0 inet dhcp`
 
 ![alt text](/img/d_gsk_3.jpg)
 
+**Testing**
+Gresik dan Sidoarjo mendapatkan pembagian IP sebagai berikut
+![alt text](/img/D_testing.PNG)
+
 #
 #### Soal 1:
 Agar topologi yang kalian buat dapat mengakses keluar, kalian diminta untuk mengkonfigurasi **SURABAYA** menggunakan iptables, namun Bibah tidak ingin kalian menggunakan MASQUERADE.
