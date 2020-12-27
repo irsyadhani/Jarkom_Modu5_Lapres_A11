@@ -232,7 +232,6 @@ iface eth0 inet dhcp`
 
 ![alt text](/img/d_gsk_3.jpg)
 
-**Testing**
 Gresik dan Sidoarjo mendapatkan pembagian IP sebagai berikut
 ![alt text](/img/D_testing.PNG)
 
@@ -375,4 +374,4 @@ iptables -A LOGGING -j DROP
 ![alt text](/img/7_surabaya.jpg)
 ![alt text](/img/7_mojokerto.jpg)
 ![alt text](/img/7_malang.jpg)
-![alt text](/img/7_testing.PNG)
+![alt text](/img/7_testing.png)
