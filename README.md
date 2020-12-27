@@ -256,6 +256,10 @@ _**Penyelesaian:**_
 iptables -A FORWARD -d 10.151.73.96/29 -i eth0 -p tcp --dport 22 -j DROP
 ```
 ![alt text](/img/2.jpg)
+
+Hasil testing dilakukan dengan mengetikkan ``nc 10.151.73.98 22`` pada terminal. Testing pertama dilakukan sebelum memasukkan perintah di iptables menunjukkan bahwa akses SSH berhasil. Testing kedua dilakukan setelah memasukkan perintah untuk mendrop semua akses SSH menunjukkan "connection timed out"
+![alt text](/img/2_testing.PNG)
+
 #
 #### Soal 3:
 Membatasi DHCP dan DNS server hanya boleh menerima maksimal 3 koneksi ICMP secara bersamaan yang berasal dari mana saja menggunakan **iptables pada masing masing server**, selebihnya akan di DROP.
@@ -350,6 +354,10 @@ iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.11 --dport 80 -j SNAT --to-so
 iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.10 --dport 80 -j SNAT --to-source 10.151.73.98
 ```
 ![alt text](/img/6.jpg)
+
+Hasil testingnya adalah sebagai berikut :
+![alt text](/img/6_testing.PNG)
+
 #
 #### Soal 7:
 Semua paket didrop oleh firewall (dalam topologi) tercatat dalam log pada setiap
@@ -367,3 +375,4 @@ iptables -A LOGGING -j DROP
 ![alt text](/img/7_surabaya.jpg)
 ![alt text](/img/7_mojokerto.jpg)
 ![alt text](/img/7_malang.jpg)
+![alt text](/img/7_testing.PNG)
