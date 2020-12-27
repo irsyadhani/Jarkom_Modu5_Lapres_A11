@@ -183,16 +183,16 @@ subnet 192.168.1.0 netmask 255.255.255.0 {
 	range 192.168.1.2 192.168.1.202;
 	option routers 192.168.1.1;
 	option broadcast-address 192.168.1.255;
-option domain-name-servers 10.151.73.98;
-default-lease-time 600;
+	option domain-name-servers 10.151.73.98, 202.46.129.2;
+	default-lease-time 600;
     	max-lease-time 7200;
 }
 subnet 192.168.3.0 netmask 255.255.255.0 {
 	range 192.168.3.2 192.168.3.212;
 	option routers 192.168.3.1;
 	option broadcast-address 192.168.3.255;
-	option domain-name-servers 10.151.73.98;
-default-lease-time 600;
+	option domain-name-servers 10.151.73.98, 202.46.129.2;
+	default-lease-time 600;
     	max-lease-time 7200;
 }
 subnet 10.151.73.96 netmask 255.255.255.248 {
@@ -345,8 +345,9 @@ _**Penyelesaian:**_
 * Pada UML SURABAYA memasukkan perintah sebagai berikut:
 ```
 iptables -t nat -A PREROUTING -p tcp -d 10.151.73.98 -m statistic --mode nth --every 2 --packet 0 -j DNAT --to-destination 192.168.0.11:80
-
 iptables -t nat -A PREROUTING -p tcp -d 10.151.73.98 -j DNAT --to-destination 192.168.0.10:80
+iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.11 --dport 80 -j SNAT --to-source 10.151.73.98
+iptables -t nat -A POSTROUTING -p tcp -d 192.168.0.10 --dport 80 -j SNAT --to-source 10.151.73.98
 ```
 ![alt text](/img/6.jpg)
 #
